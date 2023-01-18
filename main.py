@@ -473,8 +473,10 @@ class MainApp(App):
 	def on_pause(self):
 	   return True
 
-	def build(self):
+   def on_start(self):
 		plyer.orientation.set_sensor(mode='portrait')
+
+	def build(self):
 		root = Builder.load_string(uix)
 		scm.add_widget(Miner(name="Miner"))
 
