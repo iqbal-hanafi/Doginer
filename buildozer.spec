@@ -13,7 +13,7 @@ package.domain = maoundis.com
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,jpg,ttf
+source.include_exts = py,jpg
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -93,7 +93,7 @@ android.presplash_color = black
 #icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
 
 # (list) Permissions
-android.permissions = INTERNET,POST_NOTIFICATIONS
+android.permissions = INTERNET, POST_NOTIFICATIONS
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host

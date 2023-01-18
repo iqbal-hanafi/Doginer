@@ -57,12 +57,12 @@ uix = """
 			Label:
 				size_hint_y: 0.2
 				markup: True
-				outline_width: 3
+				outline_width: 4
 				outline_color: chex('#00FF00')
 				text: app.symbol + ' : {:.12f}'.format(wd_balance.value)
 		BoxLayout:
-			size_hint_y: 0.2
-			spacing: 5
+			size_hint_y: 0.18
+			spacing: 10
 			Button:
 				id: otomatis_wd
 				text: 'Otomatis Wd (OFF)'
@@ -106,10 +106,10 @@ uix = """
 			Slider:
 				id: delay
 				size_hint_x: 0.07
-				value: 1
-				min: 0.5
-				max: 10
-				step: 0.5
+				value: 2
+				min: 2
+				max: 12
+				step: 2
 		BoxLayout:
 			size_hint_y: 0.05
 			spacing: 10
@@ -270,7 +270,6 @@ class Miner(Screen):
 		}
 		
 		self.alog(f'berjalan di {plyer.devicename.device_name}')
-		plyer.orientation.set_sensor(mode='portrait')
 	
 	@cekjr
 	def set_gdata(self, url, call, *args):
@@ -320,7 +319,8 @@ class Miner(Screen):
 			    plyer.notification.notify(
     			    title='SUKSES WD', 
     			    message=f"suksess withdraw {wd_mount:.10f} DOGE",
-    			   # app_name=self.app.app_name,
+    			    ticker=f"suksess withdraw {wd_mount:.10f} DOGE",
+    			    timeout=5
 			    )
 			self.alog(f"suksess wd [b][color=FFD700]{wd_mount:.10f}[/color][/b] DOGE")
 	
@@ -345,7 +345,7 @@ class Miner(Screen):
 				return
 			else:
 				self.csrf_token=self.gdata.get_csrf_token()
-			
+
 		data=self.gdata.get_livewire_data('login')
 		data.update({'updates': [{"type": "syncInput","payload": {"id": self.gdata.get_b36(),"name": "wallet","value": self.addr3ss}},{"type": "callMethod","payload": {"id": self.gdata.get_b36(),"method": "start","params": []}}]})
 		UrlRequest(urllib.parse.urljoin(self.url,"livewire/message/login"), 
@@ -359,7 +359,7 @@ class Miner(Screen):
              method="POST",
              cookies=self.cookies
         )
-		
+
 	def success_login(self, req, res):
 		self.delay = self.ids.delay.value
 		if isinstance(res, dict):
@@ -374,7 +374,7 @@ class Miner(Screen):
 			self.ids.btn_stop_miner.disabled = False
 			self.wd_popup = WdPopup(otomatis_wd=self.otomatis_wd,get_balance=self.get_balance,wd=self.wd,addr3ss=self.addr3ss)
 			self.mining = Clock.schedule_interval(self.claim, self.delay)
-	
+
 	@cekjr
 	def eror_login(self, req, res):
 		if self.addr3ss_lama and self.addr3ss_lama != self.addr3ss and self.data_login and self.csrf_token:
@@ -402,7 +402,7 @@ class Miner(Screen):
 		else:
 			self.alog('eror, silahkan on/offkan mode pesawat anda', True)
 			self._reset()
-	
+
 	@cekjr
 	def claim(self,  *args):
 		if self.data_login and "redirect" in self.data_login["effects"]:
@@ -469,12 +469,16 @@ class MainApp(App):
 	symbol = "Ð"
 	mywallet = "D6mcwUx7QYguZNZRYA3hWwqsW6Lk1KMHH3"
 	ig_author  = "ikbal.rdmc__"
-	
+
+	def on_pause(self):
+	   return True
+
 	def build(self):
+		plyer.orientation.set_sensor(mode='portrait')
 		root = Builder.load_string(uix)
 		scm.add_widget(Miner(name="Miner"))
-		
-		return scm
+
+		return root
 
 if __name__ == "__main__":
 	app = MainApp()
