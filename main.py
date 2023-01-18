@@ -16,6 +16,8 @@ from kivy.clock import Clock
 from kivy.lang.builder import Builder
 from kivy.core.text import LabelBase
 
+LabelBase.register(name="f8bit", fn_regular="assets/fonts/8-bit_fortress.ttf")
+
 scm = ScreenManager()
 uix = """
 #:import chex kivy.utils.get_color_from_hex
@@ -178,7 +180,7 @@ uix = """
 				        text_size: self.width, None
 				        padding: 10, 10
 				        markup: True
-     					  font_name: '8bit'
+     					  font_name: 'f8bit'
 				        
 			BoxLayout:
 				size_hint_y: 0.01	
@@ -272,8 +274,8 @@ class Miner(Screen):
 			  'X-Livewire': 'true'
 		}
 		
-		self.alog(f'berjalan di {plyer.devicename.device_name} {plyer.processors.status} {plyer.uniqueid.id}')
-		plyer.orientation.set_sensor(mode='portait')
+		self.alog(f'berjalan di {plyer.devicename.device_name}')
+		plyer.orientation.set_sensor(mode='portrait')
 	
 	@cekjr
 	def set_gdata(self, url, call, *args):
@@ -474,7 +476,6 @@ class MainApp(App):
 	ig_author  = "ikbal.rdmc__"
 	
 	def build(self):
-		LabelBase.register(name="8bit", fn_regular="assets/fonts/8-bit fortress.ttf")
 		root = Builder.load_string(uix)
 		scm.add_widget(Miner(name="Miner"))
 		
