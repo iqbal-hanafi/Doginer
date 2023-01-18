@@ -11,7 +11,177 @@ from kivy.network.urlrequest import UrlRequest
 from kivy.clock import Clock
 from kivy.lang.builder import Builder
 scm = ScreenManager()
-uix = "\n#:import chex kivy.utils.get_color_from_hex\n#:import webopen webbrowser.open\n\n#:set ig_author '@'+app.ig_author\n#:set url_ig_author 'https://www.instagram.com/'+app.ig_author\n\n<WdPopup>:\n        title: 'WD '+app.symbol+'OGE'\n        size_hint: 0.9,0.5\n        BoxLayout:\n                orientation: 'vertical'\n                padding: 30\n                spacing: 30\n                BoxLayout:\n                        size_hint_y: 0.8\n                        orientation: 'vertical'\n                        spacing: 20\n                        Label:\n                                size_hint_y: 0.4\n                                text: '[size=45][b]Peringatan:[/b][/size] pastikan alamat '+root.addr3ss+' berasal dari [u][ref=faucetpay.io]faucetpay.io[/ref][/u] jika tidak ingin kehilangan saldo'\n                                markup: True\n                                text_size: self.size\n                                valign: 'center'\n                                halign: 'left'\n                                on_ref_press: \n                                        webopen('https://faucetpay.io/?r=3364476')\n                                        \n                        BoxLayout:\n                                size_hint_y: 0.2\n                                spacing: 10\n                                Label:\n                                        size_hint_x: 0.3\n                                        text: 'Jumlah:'\n                                Slider:\n                                        id: wd_balance\n                                        size_hint_x: 0.7\n                                        min: root.min_wd\n                        Label:\n                                size_hint_y: 0.2\n                                markup: True\n                                outline_width: 4\n                                outline_color: chex('#00FF00')\n                                text: app.symbol + ' : {:.12f}'.format(wd_balance.value)\n                BoxLayout:\n                        size_hint_y: 0.18\n                        spacing: 10\n                        Button:\n                                id: otomatis_wd\n                                text: 'Otomatis Wd (OFF)'\n                                on_release:\n                                    root.dismiss()\n                    root.otomatis_wd(wd_balance.value)\n                        Button:\n                                text: 'Withdraw'\n                                on_release: \n                                        root.dismiss()\n                                        root.wd(wd_balance.value)\n                        \n<Miner>:\n        BoxLayout:\n                orientation: 'vertical'\n                spacing: 20\n                padding: 20\n                BoxLayout:\n                        orientation: 'vertical'\n                        size_hint_y: 0.1\n                        Label:\n                                text: app.symbol+'oge address dari ([u][ref=faucetpay.io]faucetpay.io[/ref][/u])'\n                                size_hint_y: 0.06\n                                markup: True\n                                on_ref_press: \n                                        webopen('https://faucetpay.io/?r=3364476')\n                                        \n                        TextInput:\n                                id: doge_address\n                                size_hint_y: 0.05\n                                multiline: False\n                                focus: True\n                                cursor_width: 7\n                                hint_text: app.mywallet\n                                \n                BoxLayout:\n                        size_hint_y: 0.1\n                        Label:\n                                size_hint_x: 0.03\n                                text: 'delay: ' + str(delay.value) + ' dtk'\n                        Slider:\n                                id: delay\n                                size_hint_x: 0.07\n                                value: 2\n                                min: 2\n                                max: 12\n                                step: 2\n                BoxLayout:\n                        size_hint_y: 0.05\n                        spacing: 10\n                        Button:\n                                id: btn_miner\n                                text: 'Start Miner'\n                                on_release: root._start()\n                        Button:\n                                id: btn_stop_miner\n                                text: 'Stop Miner'\n                                disabled: not(btn_miner.disabled)\n                                on_release: root._stop()\n                                \n                BoxLayout:\n                        orientation: 'vertical'\n                        size_hint_y: 0.95\n                        BoxLayout:\n                                size_hint_y: 0.008\n                                padding: 0,0,0,50\n                                Label:\n                                        text: '[b]'+app.symbol+'[/b] Balance:'\n                                        color: chex('#FFD700')\n                                        size_hint_x: 0.02\n                                        halign: 'left'\n                                        valign: 'center'\n                                        text_size: self.size\n                                        markup: True\n                                Label:\n                                        id: balance\n                                        text: '0'\n                                        halign: 'left'\n                                        valign: 'center'\n                                        text_size: self.size\n                                        size_hint_x: 0.06\n                                Button:\n                                        id: wd\n                                        text: 'WD'\n                                        size_hint_x: 0.02\n                                        disabled: True\n                                        on_release: root.wd_popup.open()\n\n                        BoxLayout:\n                                orientation: 'vertical'\n                                size_hint_y: 0.08\n                                canvas.before:\n                                        Color:\n                                        rgb: chex('#07000B')\n                                        Rectangle:\n                                        size: self.size\n                                        pos: self.pos\n                                Label:\n                                        text: ' LOGS: '\n                                        valign: 'center'\n                                        halign: 'left'\n                                        text_size: self.size\n                                        size_hint_y: 0.05\n                                ScrollView:\n                                    do_scroll_x: False\n                                    do_scroll_y: True\n                                    bar_width: 20\n                                    Label:\n                                        id: log\n                                        size_hint_y: None\n                                        height: self.texture_size[1]\n                                        text_size: self.width, None\n                                        padding: 10, 10\n                                        markup: True\n                        BoxLayout:\n                                size_hint_y: 0.01       \n                                Label:\n                                        text: 'by [ref='+ig_author+'][u]'+ig_author+'[/u][/ref]'                                        \n                                        markup: True\n                                        on_ref_press: webopen(url_ig_author)\n"
+
+uix = """
+#:import chex kivy.utils.get_color_from_hex
+#:import webopen webbrowser.open
+
+#:set ig_author '@'+app.ig_author
+#:set url_ig_author 'https://www.instagram.com/'+app.ig_author
+
+<WdPopup>:
+        title: 'WD '+app.symbol+'OGE'
+        size_hint: 0.9,0.5
+        BoxLayout:
+                orientation: 'vertical'
+                padding: 30
+                spacing: 30
+                BoxLayout:
+                        size_hint_y: 0.8
+                        orientation: 'vertical'
+                        spacing: 20
+                        Label:
+                                size_hint_y: 0.4
+                                text: '[size=45][b]Peringatan:[/b][/size] pastikan alamat '+root.addr3ss+' berasal dari [u][ref=faucetpay.io]faucetpay.io[/ref][/u] jika tidak ingin kehilangan saldo'
+                                markup: True
+                                text_size: self.size
+                                valign: 'center'
+                                halign: 'left'
+                                on_ref_press: 
+                                        webopen('https://faucetpay.io/?r=3364476')
+                                        
+                        BoxLayout:
+                                size_hint_y: 0.2
+                                spacing: 10
+                                Label:
+                                        size_hint_x: 0.3
+                                        text: 'Jumlah:'
+                                Slider:
+                                        id: wd_balance
+                                        size_hint_x: 0.7
+                                        min: root.min_wd
+                        Label:
+                                size_hint_y: 0.2
+                                markup: True
+                                outline_width: 4
+                                outline_color: chex('#00FF00')
+                                text: app.symbol + ' : {:.12f}'.format(wd_balance.value)
+                BoxLayout:
+                        size_hint_y: 0.18
+                        spacing: 10
+                        Button:
+                                id: otomatis_wd
+                                text: 'Otomatis Wd (OFF)'
+                                on_release:
+                                    root.dismiss()
+                                    root.otomatis_wd(wd_balance.value)
+                        Button:
+                                text: 'Withdraw'
+                                on_release: 
+                                        root.dismiss()
+                                        root.wd(wd_balance.value)
+                        
+<Miner>:
+        BoxLayout:
+                orientation: 'vertical'
+                spacing: 20
+                padding: 20
+                BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: 0.1
+                        Label:
+                                text: app.symbol+'oge address dari ([u][ref=faucetpay.io]faucetpay.io[/ref][/u])'
+                                size_hint_y: 0.06
+                                markup: True
+                                on_ref_press: 
+                                        webopen('https://faucetpay.io/?r=3364476')
+                                        
+                        TextInput:
+                                id: doge_address
+                                size_hint_y: 0.05
+                                multiline: False
+                                focus: True
+                                cursor_width: 7
+                                hint_text: app.mywallet
+                                
+                BoxLayout:
+                        size_hint_y: 0.1
+                        Label:
+                                size_hint_x: 0.03
+                                text: 'delay: ' + str(delay.value) + ' dtk'
+                        Slider:
+                                id: delay
+                                size_hint_x: 0.07
+                                value: 2
+                                min: 2
+                                max: 12
+                                step: 2
+                BoxLayout:
+                        size_hint_y: 0.05
+                        spacing: 10
+                        Button:
+                                id: btn_miner
+                                text: 'Start Miner'
+                                on_release: root._start()
+                        Button:
+                                id: btn_stop_miner
+                                text: 'Stop Miner'
+                                disabled: not(btn_miner.disabled)
+                                on_release: root._stop()
+                                
+                BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: 0.95
+                        BoxLayout:
+                                size_hint_y: 0.008
+                                padding: 0,0,0,50
+                                Label:
+                                        text: '[b]'+app.symbol+'[/b] Balance:'
+                                        color: chex('#FFD700')
+                                        size_hint_x: 0.02
+                                        halign: 'left'
+                                        valign: 'center'
+                                        text_size: self.size
+                                        markup: True
+                                Label:
+                                        id: balance
+                                        text: '0'
+                                        halign: 'left'
+                                        valign: 'center'
+                                        text_size: self.size
+                                        size_hint_x: 0.06
+                                Button:
+                                        id: wd
+                                        text: 'WD'
+                                        size_hint_x: 0.02
+                                        disabled: True
+                                        on_release: root.wd_popup.open()
+
+                        BoxLayout:
+                                orientation: 'vertical'
+                                size_hint_y: 0.08
+                                canvas.before:
+                                        Color:
+                                        rgb: chex('#07000B')
+                                        Rectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                Label:
+                                        text: ' LOGS: '
+                                        valign: 'center'
+                                        halign: 'left'
+                                        text_size: self.size
+                                        size_hint_y: 0.05
+                                ScrollView:
+                                    do_scroll_x: False
+                                    do_scroll_y: True
+                                    bar_width: 20
+                                    Label:
+                                        id: log
+                                        size_hint_y: None
+                                        height: self.texture_size[1]
+                                        text_size: self.width, None
+                                        padding: 10, 10
+                                        markup: True
+                        BoxLayout:
+                                size_hint_y: 0.01       
+                                Label:
+                                        text: 'by [ref='+ig_author+'][u]'+ig_author+'[/u][/ref]'                                        
+                                        markup: True
+                                        on_ref_press: webopen(url_ig_author)
+"""
+
+
 import plyer
 
 class _gData:
