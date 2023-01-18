@@ -14,9 +14,6 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.network.urlrequest import UrlRequest
 from kivy.clock import Clock
 from kivy.lang.builder import Builder
-from kivy.core.text import LabelBase
-
-LabelBase.register(name="f8bit", fn_regular="assets/fonts/8-bit_fortress.ttf")
 
 scm = ScreenManager()
 uix = """
@@ -180,8 +177,6 @@ uix = """
 				        text_size: self.width, None
 				        padding: 10, 10
 				        markup: True
-     					  font_name: 'f8bit'
-				        
 			BoxLayout:
 				size_hint_y: 0.01	
 				Label:
