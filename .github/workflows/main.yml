@@ -6,6 +6,8 @@ on:
     paths:
       - '**.py'
       - 'buildozer.spec'
+      - '**.kv'
+      - '**.jpg'
 
 jobs:
   build-android:
@@ -29,7 +31,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
       - name: Upload Release Asset
-        id: upload-release-asset 
+        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,4 +40,3 @@ jobs:
           asset_path: ${{ steps.buildozer.outputs.filename }}
           asset_name: ${{ github.ref }}.zip
           asset_content_type: application/zip
-     
