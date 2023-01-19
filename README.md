@@ -1,5 +1,5 @@
 # Doginer
-Doginer adalah alat untuk menambang dogecoin apk ini berjalan menggunakan api scrap dibuat dengan kivy
+Doginer adalah aplikasi android untuk mengklaim dogecoin, dibuat dengan kivy
 
 <center>
   <img alt="doginer" src="assets/images/logo.jpg" width="250" height="250"></img>
@@ -7,7 +7,8 @@ Doginer adalah alat untuk menambang dogecoin apk ini berjalan menggunakan api sc
 
 # Install
 download [apk](https://github.com/ikbal-hanafi/Doginer/releases)
-arch:
+
++ hanya support arch:
   - armeabi-v7a
   - arm64-v8a
 
