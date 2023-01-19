@@ -4,7 +4,7 @@
 title = Doginer
 
 # (str) Package name
-package.name = miner.maoundis.com
+package.name = doginer.maoundis.com
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = maoundis.com
@@ -29,7 +29,7 @@ source.include_exts = py,jpg
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+version = 0.120
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -262,7 +262,7 @@ android.permissions = INTERNET, POST_NOTIFICATIONS
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a
+android.archs = armeabi-v7a, arm64-v8a, x86, x86_64
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
