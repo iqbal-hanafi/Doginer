@@ -220,7 +220,7 @@ def cekjr(func):
     return wrapper
 
 class WdPopup(Popup):
-    min_wd = 0.000001 #0.001
+    min_wd = 0.001
     addr3ss = StringProperty()
     wd = ObjectProperty()
     otomatis_wd = ObjectProperty()
