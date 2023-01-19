@@ -29,10 +29,10 @@ source.include_exts = py,jpg
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = v1.0
+#version = v1.0
 
 # (str) Application versioning (method 2)
-version.regex = (.*)
+version.regex = (.*?)
 version.filename = %(source.dir)s/version.txt
 
 # (list) Application requirements
