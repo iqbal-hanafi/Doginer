@@ -1,6 +1,7 @@
 # Doginer
 Doginer adalah alat untuk menambang dogecoin apk ini berjalan menggunakan api scrap dibuat dengan kivy
 
-
-![doginer|250x250,50%](assets/images/logo.jpg)
+<center>
+  <img alt="doginer" src="assets/images/logo.jpg" width="250" height="250"></img>
+</center>
 
