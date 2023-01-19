@@ -5,3 +5,4 @@ Doginer adalah alat untuk menambang dogecoin apk ini berjalan menggunakan api sc
   <img alt="doginer" src="assets/images/logo.jpg" width="250" height="250"></img>
 </center>
 
+[install](https://github.com/ikbal-hanafi/Doginer/releases)
