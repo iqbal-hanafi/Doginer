@@ -4,12 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'v*.*'
-    paths:
-      - '**.py'
-      - 'buildozer.spec'
-      - '**.kv'
-      - '**.jpg'
+      - 'v*'
 
 jobs:
   build-android:
