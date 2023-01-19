@@ -1,5 +1,6 @@
 #: by @ikbal.rdmc__
 
+__version__ = "v1.0" #beta
 
 import re, urllib, html, json, random, math, string, socket, functools
 from functools import partial
@@ -245,7 +246,7 @@ class Miner(Screen):
         self.otomatis_jumlah_wd = None
         self.otomatis_wdy = False
         self.wd_popup = ObjectProperty()
-        self.user_agent = 'Mozilla/5.0 (Linux; Android 12; SM-M236B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'
+        self.user_agent = 'Mozilla/5.0', #'(Linux; Android 12; SM-M236B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'
         self.url = 'https://fpminer.com/'
         self.headers = headers = {'Authority': 'fpminer.com', 'Accept': 'text/html, application/xhtml+xml', 'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7', 'Content-Type': 'application/json', 'sec-ch-ua': '"Chromium";v="107", "Not=A?Brand";v="24"', 'sec-ch-ua-mobile': '?1', 'sec-ch-ua-platform': '"Android"', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-origin', 'User-Agent': self.user_agent, 'X-Livewire': 'true'}
         self.alog(f'berjalan di perangkat {plyer.devicename.device_name}')
