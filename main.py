@@ -37,9 +37,9 @@ uix = """
                                 text_size: self.size
                                 valign: 'center'
                                 halign: 'left'
-                                on_ref_press: 
+                                on_ref_press:
                                         webopen('https://faucetpay.io/?r=3364476')
-                                        
+
                         BoxLayout:
                                 size_hint_y: 0.2
                                 spacing: 10
@@ -63,14 +63,14 @@ uix = """
                                 id: otomatis_wd
                                 text: 'Otomatis Wd (OFF)'
                                 on_release:
-                                    root.dismiss()
-                                    root.otomatis_wd(wd_balance.value)
+                                        root.dismiss()
+                                        root.otomatis_wd(wd_balance.value)
                         Button:
                                 text: 'Withdraw'
-                                on_release: 
+                                on_release:
                                         root.dismiss()
                                         root.wd(wd_balance.value)
-                        
+
 <Miner>:
         BoxLayout:
                 orientation: 'vertical'
@@ -83,9 +83,9 @@ uix = """
                                 text: app.symbol+'oge address dari ([u][ref=faucetpay.io]faucetpay.io[/ref][/u])'
                                 size_hint_y: 0.06
                                 markup: True
-                                on_ref_press: 
+                                on_ref_press:
                                         webopen('https://faucetpay.io/?r=3364476')
-                                        
+
                         TextInput:
                                 id: doge_address
                                 size_hint_y: 0.05
@@ -93,7 +93,7 @@ uix = """
                                 focus: True
                                 cursor_width: 7
                                 hint_text: app.mywallet
-                                
+
                 BoxLayout:
                         size_hint_y: 0.1
                         Label:
@@ -118,7 +118,7 @@ uix = """
                                 text: 'Stop Miner'
                                 disabled: not(btn_miner.disabled)
                                 on_release: root._stop()
-                                
+
                 BoxLayout:
                         orientation: 'vertical'
                         size_hint_y: 0.95
@@ -152,10 +152,10 @@ uix = """
                                 size_hint_y: 0.08
                                 canvas.before:
                                         Color:
-                                        rgb: chex('#07000B')
+                                                rgb: chex('#07000B')
                                         Rectangle:
-                                        size: self.size
-                                        pos: self.pos
+                                                size: self.size
+                                                pos: self.pos
                                 Label:
                                         text: ' LOGS: '
                                         valign: 'center'
@@ -163,20 +163,20 @@ uix = """
                                         text_size: self.size
                                         size_hint_y: 0.05
                                 ScrollView:
-                                    do_scroll_x: False
-                                    do_scroll_y: True
-                                    bar_width: 20
-                                    Label:
-                                        id: log
-                                        size_hint_y: None
-                                        height: self.texture_size[1]
-                                        text_size: self.width, None
-                                        padding: 10, 10
-                                        markup: True
+                                        do_scroll_x: False
+                                        do_scroll_y: True
+                                        bar_width: 20
+                                        Label:
+                                                id: log
+                                                size_hint_y: None
+                                                height: self.texture_size[1]
+                                                text_size: self.width, None
+                                                padding: 10, 10
+                                                markup: True
                         BoxLayout:
-                                size_hint_y: 0.01       
+                                size_hint_y: 0.01
                                 Label:
-                                        text: 'by [ref='+ig_author+'][u]'+ig_author+'[/u][/ref]'                                        
+                                        text: 'by [ref='+ig_author+'][u]'+ig_author+'[/u][/ref]'
                                         markup: True
                                         on_ref_press: webopen(url_ig_author)
 """
@@ -394,11 +394,12 @@ class MainApp(App):
 
     def on_start(self):
         plyer.orientation.set_sensor(mode='portrait')
-
+        
     def build(self):
         root = Builder.load_string(uix)
         scm.add_widget(Miner(name='Miner'))
-        return root
+        return scm
+        
 if __name__ == '__main__':
     app = MainApp()
     app.run()
