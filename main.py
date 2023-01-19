@@ -194,7 +194,6 @@ uix = """
 import plyer
 
 class _gData:
-
     def __init__(self, res):
         self._res = res
 
@@ -212,7 +211,6 @@ class _gData:
         return int2base(int(str(random.random() + 1).split('.')[-1]), 36)[7:]
 
 def cekjr(func):
-
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
