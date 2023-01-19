@@ -44,7 +44,7 @@ requirements = python3,kivy,plyer
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = assets/images/logo.jpg
+presplash.filename = assets/images/splash.jpg
 
 # (str) Icon of the application
 icon.filename = assets/images/logo.jpg
