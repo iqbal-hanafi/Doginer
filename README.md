@@ -1,4 +1,6 @@
 # Doginer
+[![Doginer](https://img.shields.io/github/v/release/ikbal-hanafi/Doginer?include_prereleases)](https://github.com/ikbal-hanafi/Doginer/releases)
+
 Doginer adalah aplikasi android untuk mengklaim dogecoin, dibuat dengan kivy
 
 <center>
