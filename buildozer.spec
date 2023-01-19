@@ -13,7 +13,7 @@ package.domain = maoundis.com
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,jpg
+source.include_exts = py,jpg,txt
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -33,7 +33,7 @@ source.include_exts = py,jpg
 
 # (str) Application versioning (method 2)
 version.regex = (.*?)
-version.filename = %(source.dir)s/version.txt
+version.filename = version.txt
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
