@@ -7,6 +7,11 @@ Doginer adalah aplikasi android untuk mengklaim dogecoin, dibuat dengan kivy
   <img alt="doginer" src="assets/images/logo.jpg" width="250" height="250"></img>
 </center>
 
-# Install
-download [apk](https://github.com/ikbal-hanafi/Doginer/releases) hanya support arch `armeabi-v7a` dan `arm64-v8a`
+## Install
+download [apk](https://github.com/ikbal-hanafi/Doginer/releases)
+- [X] armeabi-v7a
+- [X] arm64-v8a
+- [ ] x86
+- [ ] x86_64
+
 

@@ -1,7 +1,5 @@
 #: by @ikbal.rdmc__
 
-__version__ = "v1.0" #beta
-
 import re, urllib, html, json, random, math, string, socket, functools
 from functools import partial
 from time import strftime
