@@ -374,11 +374,12 @@ class Miner(Screen):
 
     def alog(self, text, eror=False):
          color = '#FF0000' if eror else '#00FF00'
-         def set_log(t, *args):
-                 self.ids.log.text += f'[color={color}]{t}[/color]'
-                 Clock.tick_draw()
-         for t in [*list(strftime('%H:%M:%S ~ ')),text+'\n']:
-                 Clock.schedule_once(partial(set_log,t), 0.3)
+         def set_log(*args):
+                 self.ids.log.text += f'[color={color}]{text}[/color]\n'
+         Clock.schedule_once(set_log,0)
+#                 Clock.tick_draw()
+#         for t in [*list(strftime('%H:%M:%S ~ ')),text+'\n']:
+#                 Clock.schedule_once(partial(set_log,t), 0.3)
                 
                  
     def btn_dsbl(self, x):
