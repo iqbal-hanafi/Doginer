@@ -1,3 +1,6 @@
+#: by @ikbal.rdmc__
+
+
 import re, urllib, html, json, random, math, string, socket, functools
 from functools import partial
 from time import strftime
@@ -10,6 +13,7 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.network.urlrequest import UrlRequest
 from kivy.clock import Clock
 from kivy.lang.builder import Builder
+
 scm = ScreenManager()
 
 uix = """
