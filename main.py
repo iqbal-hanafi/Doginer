@@ -53,12 +53,12 @@ uix = """
                         Label:
                                 size_hint_y: 0.2
                                 markup: True
-                                outline_width: 4
-                                outline_color: chex('#00FF00')
+                                
+                                color: chex('#00FF00')
                                 text: app.symbol + ' : {:.12f}'.format(wd_balance.value)
                 BoxLayout:
-                        size_hint_y: 0.18
-                        spacing: 10
+                        size_hint_y: 0.15
+                        spacing: 20
                         Button:
                                 id: otomatis_wd
                                 text: 'Otomatis Wd (OFF)'
@@ -93,6 +93,8 @@ uix = """
                                 focus: True
                                 cursor_width: 7
                                 hint_text: app.mywallet
+                                on_text:
+                                        btn_miner.disabled = len(self.text.strip()) < 10
 
                 BoxLayout:
                         size_hint_y: 0.1
@@ -112,21 +114,23 @@ uix = """
                         Button:
                                 id: btn_miner
                                 text: 'Start Miner'
+                                disabled: True
                                 on_release: root._start()
                         Button:
                                 id: btn_stop_miner
                                 text: 'Stop Miner'
-                                disabled: not(btn_miner.disabled)
+                                disabled: True
                                 on_release: root._stop()
 
                 BoxLayout:
                         orientation: 'vertical'
                         size_hint_y: 0.95
                         BoxLayout:
-                                size_hint_y: 0.008
+                                size_hint_y: 0.01
                                 padding: 0,0,0,50
+                                spacing: 10
                                 Label:
-                                        text: '[b]'+app.symbol+'[/b] Balance:'
+                                        text: '[b]'+app.symbol+' Balance: [/b]'
                                         color: chex('#FFD700')
                                         size_hint_x: 0.02
                                         halign: 'left'
@@ -149,35 +153,41 @@ uix = """
 
                         BoxLayout:
                                 orientation: 'vertical'
-                                size_hint_y: 0.08
-                                canvas.before:
-                                        Color:
-                                                rgb: chex('#07000B')
-                                        Rectangle:
-                                                size: self.size
-                                                pos: self.pos
-                                Label:
-                                        text: ' LOGS: '
-                                        valign: 'center'
-                                        halign: 'left'
-                                        text_size: self.size
-                                        size_hint_y: 0.05
+                                size_hint_y: 0.05
+                                spacing: 20     
                                 ScrollView:
                                         do_scroll_x: False
                                         do_scroll_y: True
-                                        bar_width: 20
+                                        scroll_timeout: 20
+                                        scroll_type: ["bars"]
+                                        bar_width: 40
+                                        bar_margin: 10
+                                        scroll_y: 1
+                                        smooth_scroll_end: 10                    
+                                        canvas.before:
+                                                Color:
+                                                        rgb: chex('#0F0F00')
+                                                RoundedRectangle:
+                                                        size: self.size
+                                                        pos: self.pos
+                                                        radius: [10]                                           
                                         Label:
                                                 id: log
                                                 size_hint_y: None
                                                 height: self.texture_size[1]
                                                 text_size: self.width, None
-                                                padding: 10, 10
+                                                padding: 20, 20
                                                 markup: True
                         BoxLayout:
-                                size_hint_y: 0.01
+                                size_hint_y: 0.06
+                                orientation: 'vertical'
+                                Widget:
+                                        size_hint_y: 0.09
                                 Label:
+                                        size_hint_y: 0.01
                                         text: 'by [ref='+ig_author+'][u]'+ig_author+'[/u][/ref]'
                                         markup: True
+                                        font_size: dp(10)
                                         on_ref_press: webopen(url_ig_author)
 """
 
@@ -358,12 +368,14 @@ class Miner(Screen):
         self.alog('eror claim', True)
 
     def alog(self, text, eror=False):
-
-        def set_log(*x):
-            color = '#FF0000' if eror else '#00FF00'
-            self.ids.log.text += strftime(f'[color={color}]%H:%M:%S -> {text} [/color]\n')
-        Clock.schedule_once(set_log, 0)
-
+         color = '#FF0000' if eror else '#00FF00'
+         def set_log(t, *args):
+                 self.ids.log.text += f'[color={color}]{t}[/color]'
+                 Clock.tick_draw()
+         for t in [*list(strftime('%H:%M:%S -> ')),text+'\n']:
+                 Clock.schedule_once(partial(set_log,t), 0.3)
+                
+                 
     def btn_dsbl(self, x):
         self.ids.btn_miner.disabled = x
         self.ids.delay.disabled = x
