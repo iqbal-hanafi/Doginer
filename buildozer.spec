@@ -32,7 +32,7 @@ source.include_exts = py,jpg,txt
 #version = v1.0
 
 # (str) Application versioning (method 2)
-version.regex = ([^\s]+)
+version.regex = (?<=v)([\d.]+)(?=[^\d])
 version.filename = v.txt
 
 # (list) Application requirements
