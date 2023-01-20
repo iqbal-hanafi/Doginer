@@ -33,7 +33,7 @@ source.include_exts = py,jpg,txt
 
 # (str) Application versioning (method 2)
 version.regex = ([^\s]+)
-version.filename = version.txt
+version.filename = v.txt
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
