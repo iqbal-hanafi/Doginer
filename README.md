@@ -17,7 +17,7 @@ Doginer adalah aplikasi android untuk mengklaim dogecoin, dibuat dengan kivy
 ## Run
 
 ```
-pip install kivy
+pip install kivy plyer
 python main.py
 ```
 
